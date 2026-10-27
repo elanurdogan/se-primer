@@ -1,6 +1,12 @@
 # SE Primer — YZM301
 
-YZM301 dersi için hazırlanan “SE Primer” ödevi: hastane randevu sistemi krizi üzerine kurulu, mobilde oynanan, kişiselleştirilmiş ve seçimli bir yazılım mühendisliği oyunu.
+YZM301 dersi için hazırlanan “SE Primer” ödevi: eczane / e-reçete sistemi krizi üzerine kurulu, mobilde oynanan, kişiselleştirilmiş ve seçimli bir yazılım mühendisliği oyunu.
+
+## Senaryo
+
+“08:30, reçete sistemi çöktü. Nöbetçi sensin.” Dün gece kurgusal reçete sorgulama servisi **ReçeteKöprü**'nün yeni sürümü yayına alındı. Eczaneler reçete numarasıyla ilaç karşılayamıyor. İnsülin ve tansiyon ilacı bekleyen kronik hastalar kapıda. Ayrıntılar `spec.md` §3'te.
+
+Sistem ve kurum adları **kurgusaldır** (ReçeteKöprü, KSSK Provizyon Servisi). Gerçek bir kamu sistemi veya kurum adı kullanılmaz.
 
 ## Oyunun kapsamı
 
@@ -30,7 +36,7 @@ YZM301 dersi için hazırlanan “SE Primer” ödevi: hastane randevu sistemi k
 ```
 se-primer/
 ├── CLAUDE.md
-├── spec.md          # (oluşturulacak)
+├── spec.md          # oyun spesifikasyonu
 ├── README.md        # (oluşturulacak)
 ├── design/          # Stitch çıktıları, DESIGN.md
 ├── app/             # Google AI Studio uygulaması
@@ -41,7 +47,7 @@ se-primer/
 ## Kurallar
 
 1. **Dil:** Tüm repo dokümanları (spec, DESIGN, README, eval notları, yorumlar dahil dokümantasyon) **Türkçe** yazılır. Harici araçlara verilen promptlar (Stitch, AI Studio vb.) bu kurala tabi değildir: yönergeleri İngilizce olabilir, ancak ekranda görünen metinler Türkçe kalır.
-2. **Hasta verisi:** Gerçek hasta verisi **asla** kullanılmaz. Uydurma isimler bile maskeli olur: `Hasta-001`, `Hasta-002` gibi. Gerçekçi ad-soyad, TC kimlik no, telefon vb. üretilmez.
+2. **Hasta verisi:** Gerçek hasta verisi **asla** kullanılmaz. Uydurma veriler bile maskeli olur: hasta `Hasta-001`, `Hasta-002`; reçete numarası `RX-XXXX`; TC kimlik no, ilaç ve tanı kodu `***`. Gerçekçi ad-soyad, TC kimlik no, telefon, reçete no vb. üretilmez. Bir kişiyle ilişkilendirilmiş ilaç veya tanı örneği verilmez.
 3. **data-testid:** Her etkileşimli UI öğesinin (buton, input, seçenek, link, tutor giriş alanı vb.) bir `data-testid` özniteliği olur; Cypress testleri bu seçicilerle yazılır.
 4. **Eval etiketlemesi:** Tutor eval’indeki 20 cevabın etiketlemesini **model yapmaz, kullanıcı yapar.** Model yalnızca etiketleme şablonunu/dosyasını hazırlayabilir; etiket alanlarını boş bırakır ve doldurmaz, tahmin önermez.
 
