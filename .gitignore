@@ -1,0 +1,18 @@
+# Bağımlılıklar
+node_modules/
+
+# Ortam değişkenleri / API anahtarları
+.env
+.env.*
+!.env.example
+
+# Cypress çıktıları (final demo videosu hariç)
+cypress/videos/*
+!cypress/videos/final-demo.mp4
+cypress/screenshots/
+
+# Derleme ve sistem dosyaları
+dist/
+build/
+.DS_Store
+Thumbs.db
