@@ -40,7 +40,7 @@ se-primer/
 
 ## Kurallar
 
-1. **Dil:** Tüm dokümanlar (spec, DESIGN, README, eval notları, yorumlar dahil dokümantasyon) **Türkçe** yazılır.
+1. **Dil:** Tüm repo dokümanları (spec, DESIGN, README, eval notları, yorumlar dahil dokümantasyon) **Türkçe** yazılır. Harici araçlara verilen promptlar (Stitch, AI Studio vb.) bu kurala tabi değildir: yönergeleri İngilizce olabilir, ancak ekranda görünen metinler Türkçe kalır.
 2. **Hasta verisi:** Gerçek hasta verisi **asla** kullanılmaz. Uydurma isimler bile maskeli olur: `Hasta-001`, `Hasta-002` gibi. Gerçekçi ad-soyad, TC kimlik no, telefon vb. üretilmez.
 3. **data-testid:** Her etkileşimli UI öğesinin (buton, input, seçenek, link, tutor giriş alanı vb.) bir `data-testid` özniteliği olur; Cypress testleri bu seçicilerle yazılır.
 4. **Eval etiketlemesi:** Tutor eval’indeki 20 cevabın etiketlemesini **model yapmaz, kullanıcı yapar.** Model yalnızca etiketleme şablonunu/dosyasını hazırlayabilir; etiket alanlarını boş bırakır ve doldurmaz, tahmin önermez.
