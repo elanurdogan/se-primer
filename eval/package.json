@@ -1,0 +1,11 @@
+{
+  "name": "se-primer-eval",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "eval": "node run-eval.mjs"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  }
+}
