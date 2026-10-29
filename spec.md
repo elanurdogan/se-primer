@@ -34,6 +34,8 @@ Oyun başında profil ekranında **3 soru** sorulur. Cevaplar oturum boyunca bel
 | **Biraz deneyimim var** | İpucu gizlidir. "İpucu göster" butonuyla açılabilir. | Yok | Açık |
 | **Deneyimliyim** | İpucu **hiç yoktur** (kutu ve buton gösterilmez). | **Her karar ekranında 60 sn** | Açık (süre işlemeye devam eder) |
 
+İpucu kartı ile süre sayacı birbirini dışlar: hiçbir seviyede aynı karar ekranında birlikte görünmezler (yeni başlayan: ipucu kartı var, sayaç yok; deneyimli: 60 sn sayaç var, ipucu kartı yok).
+
 İpucu metinleri (bkz. §3) cevabı söylemez, yalnızca düşünülecek boyutu gösterir. Tutor kuralları ipuçları için de geçerlidir (§5).
 
 ### 2.2 Soru 2 — Rol: "Bu krizde hangi roldesin?"
@@ -227,6 +229,14 @@ KÖTÜ  ⇔  (k3 = ham)  VEYA  (k1 = yama VE k2 = hemen)
 - **KÖTÜ / ikinci çöküş:** "ReçeteKöprü 10:45'te ikinci kez çöktü. İnsülin ve tansiyon ilacı bekleyen hastaların bir kısmı ilaçsız eve döndü." Bunun ardından §3'teki klinik sonuç notu gösterilir.
 - **KÖTÜ / KVKK ihlali:** "İlaç ve tanı bilgisi içeren reçete logu, dış tedarikçi dahil 40 kişiye maskelenmeden gitti. Kurum ihlali KVK Kurulu'na bildirdi."
 
+**"Rolün için ders" metinleri** (`ending-role-lesson`). Metin, oyuncunun rolüne ve son türüne göre seçilir. Kıl payı İYİ de İYİ metnini kullanır. KÖTÜ metni hem ikinci çöküş hem KVKK ihlali nedeni için geçerlidir.
+
+| Rol | İYİ son | KÖTÜ son |
+|---|---|---|
+| **Backend geliştirici** | "Bağımlı bir servis yavaşladığında sistemin ne yapacağı bir tasarım kararıdır. Zaman aşımı, devre kesici ve fail-closed kontrol kök nedeni çözer. Canlıda yapılan hızlı bir ayar ise yalnızca belirtiyi örter." | "Canlıda elle yapılan bir ayar da, maskelenmemiş bir log satırı da kodda görünmez ama sistemi bozar. Belirtiyi değil kökü düzelt. Logda yalnızca hatayı analiz etmeye yetecek alanları paylaş." |
+| **Test / QA mühendisi** | "Kriz anında test bütün akışları değil, en riskli akışı hedefler. Bağımlı servisin yavaşladığı durumu taklit etmek ve temiz bir geri dönüş yolu bulundurmak, uç durumların eczacının ekranına ulaşmasını engeller." | "Baskı altında atlanan her doğrulama adımı riski canlıya ya da paylaşım kanalına taşır. Bağımlı servis yavaşlarken neyin bozulduğunu ve paylaşılan verinin amaca uygun olup olmadığını doğrulamak da QA'nın işidir." |
+| **Proje yöneticisi** | "Hız ile risk arasındaki dengeyi görünür kıldın. Birkaç dakikalık gecikme, ikinci bir kesintiden ve bir veri ihlalinden çok daha ucuzdur. Paydaşlara bunu söyleyebilmek de krizi yönetmenin bir parçasıdır." | "Kapıdaki baskı en hızlı görünen seçeneği cazip kılar. Ama ikinci bir kesinti ya da bir veri ihlali, kazanılan dakikalardan çok daha pahalıya gelir. Riskli bir kararı kimin, hangi bilgiyle onayladığını görünür kıl." |
+
 ### 4.4 Süre dolması
 
 - Sayaç yalnızca **Deneyimliyim** seviyesinde ve yalnızca `K1`, `K2`, `K3` durumlarında çalışır. Her karar ekranında 60'tan başlar.
@@ -234,6 +244,12 @@ KÖTÜ  ⇔  (k3 = ham)  VEYA  (k1 = yama VE k2 = hemen)
 - Sonuç ekranında normal metinlerin üstünde **"Süre doldu"** notu gösterilir (§3'teki "süre dolarsa" metinleri).
 - Sonuç ekranlarında ve tutor paneli açıkken sayaç **durmaz**. Sayaç yalnızca karar ekranından çıkıldığında sıfırlanır.
 - Süre dolmasıyla verilen kararlar son kuralına normal kararlar gibi girer. Son ekranındaki özette "(süre doldu)" etiketiyle gösterilir.
+
+### 4.5 Yeniden oyna
+
+- `restart-button` sayfayı **yenilemez** (`location.reload()` kullanılmaz).
+- Oyun durumu (`k1`, `k2`, `k3`, her karar için `zamanAsimi`, sayaç) ve profil (`seviye`, `rol`, `hedef`) sıfırlanır.
+- Oyun `Karsilama` durumuna (E1) döner.
 
 ---
 

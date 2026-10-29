@@ -2,9 +2,11 @@
 
 > Stitch projesindeki tasarım sisteminden ve dışa aktarılan HTML'den çıkarılmıştır.
 
+> **Kural:** Metin ve davranışın tek doğru kaynağı spec.md'dir; Stitch ekranları yalnızca görsel referanstır. Ekranlardaki örnek sayılar ve metinler uygulamaya taşınmaz.
+
 Kaynak dosyalar: `design/html/*.html` (Stitch dışa aktarımı), `design/*.png` (ekran görüntüleri).
 Bu belgedeki tüm değerler bu HTML dosyalarında geçen gerçek değerlerdir. HTML'de karşılığı olmayan değerler **belirtilmemiş** olarak işaretlenmiştir.
-Davranış ve metinlerde tek doğruluk kaynağı `spec.md`'dir. Farklar en alttaki uyumsuzluk bölümündedir.
+Ekranlarla spec arasındaki farklar ve her biri için alınan karar en alttaki uyumsuzluk bölümündedir.
 
 ---
 
@@ -241,7 +243,13 @@ Stitch HTML'lerinde **hiç `data-testid` yoktur**. Aşağıdaki adlar `spec.md` 
 
 ## 9. Koşullu görünen bileşenler
 
-Sahne ekranı tasarımda **üç koşullu bileşeni birlikte** göstermektedir. Bu gerçek bir oyun durumu değildir, yalnızca bileşenlerin görünümünü göstermek için bir arada çizilmiştir. Uygulamada:
+**Süre sayacı ile ipucu kartı birbirini dışlar.** Aynı karar ekranında hiçbir zaman birlikte görünmezler:
+
+- **Yeni başladım:** ipucu kartı var, sayaç yok.
+- **Biraz deneyimim var:** ipucu kartı gizli (`hint-toggle` ile açılır), sayaç yok.
+- **Deneyimliyim:** 60 sn sayaç var, ipucu kartı ve `hint-toggle` yok.
+
+Sahne taslağında (`design/sahne.png`) sayacın, ipucu kartının ve odak rozetinin birlikte görünmesinin tek nedeni tüm durumları tek taslakta göstermektir. Bu gerçek bir oyun durumu değildir. Uygulamada:
 
 | Bileşen | `data-testid` | Ne zaman görünür (spec §2) |
 |---|---|---|
@@ -256,42 +264,52 @@ Son ekranında karar özetindeki "ODAK" rozeti ve vurgulu satır da hedefe göre
 
 ## 10. Ekranlar ile spec.md arasındaki uyumsuzluklar
 
-> `spec.md` değiştirilmemiştir. Bu liste uygulama sırasında hangisinin esas alınacağına karar vermek içindir.
+Her maddenin kararı dört seçenekten biridir:
+
+- **spec geçerli:** Uygulamada spec metni ve davranışı kullanılır.
+- **Stitch'te düzeltildi:** Ekran yeniden dışa aktarıldı.
+- **spec'e eklendi:** Eksik tanım spec.md'ye eklendi.
+- **dekoratif öğe, test edilmez:** Görsel olarak kullanılabilir, `data-testid` almaz. Gösterilen sayılar spec'teki senaryoyla (§3: 142 eczane, kuyrukta 1.240 reçete, 10:45'te ikinci çöküş vb.) çelişmemelidir.
 
 ### 10.1 Ekranda olup spec'te olmayan öğeler
 
-1. **Üst çubuk ve durum şeridi** (tüm ekranlar): "SE Primer", saat (08:30 / 10:45 / 12:00), "ReçeteKöprü · DURUM: KESİNTİ / STABİL", "L4-ALERT" / "L4-NORMAL".
-2. **Giriş:** "NÖBET DEVRİ" etiketi, "Nöbetçi sensin" başlığı, "Önce seni tanıyalım…" açıklaması, "ANKET İLERLEMESİ 2 / 3" çubuğu, "3 sorunun hepsini cevapla" yardımcı metni, seviye seçeneklerinin alt açıklamaları ("Her kararda ipucu görürsün." vb.), rol ikonları.
-3. **Sahne:** "Karar 1 / 3" ilerlemesi ve "KRİZ AŞAMASI" etiketi, "MİMARİ" kategori rozeti, izleme satırı ("Kuyruktaki reçete: 1.240 · Etkilenen eczane: 142 · HTTP 503"; sayılar §3'te geçiyor ama UI öğesi olarak tanımlı değil), seçeneklerdeki harf daireleri, tutor alt başlığı "Cevabı söylemez, düşünmeni sağlar.", çevrimiçi noktası, "T" avatarı, sürükleme tutamağı.
-4. **Son ekranları:** "POSTMORTEM #882" şeridi ("SEV-1 TERMINATED" / "ÇÖZÜLDÜ · STABİL"), "NÖBET SONU" etiketi ve saat rozeti, metrik ızgarası (Kötü: "Kesinti süresi 42 dk 18 sn", "Etkilenen reçete 1.420 Adet"; İyi: "14 dk", "Başarılı reçete 1.420 Adet"), "Kritik Bulgular · 2 Hata", "3/3 İncelendi" / "3/3 Başarılı", karar satırlarındaki açıklamalar, "Farklı kararlar alarak sistemi stabil tutmayı dene." metni.
-5. **"Rolün için ders" metinleri** ("Belirtiyi değil kökü düzelt…", "Geri dönüş yolu bir güvenlik ağıdır…"): spec bu kartı tanımlıyor (`ending-role-lesson`) ama metinlerini vermiyor.
-6. **Kötü son ekranında artık kalmış alt çubuk:** Giriş ekranındaki pasif "Nöbeti devral" butonu ve "3 sorunun hepsini cevapla" metni son ekranında da duruyor. Stitch kopyalama hatası, uygulamaya alınmamalı.
-7. **"Yeniden oyna" betiği:** Buton metni "Sistem Sıfırlanıyor..." olur ve sayfayı yeniler (`window.location.reload()`). Spec'te bu metin yok, yalnızca `Karsilama`'ya dönüş var.
-8. **`<title>`:** Son ekranlarında da "SE Primer - Nöbet Devri" yazıyor (giriş ekranından kalma).
+| # | Öğe | Karar |
+|---|---|---|
+| 1 | **Üst çubuk ve durum şeridi** (tüm ekranlar): "SE Primer", saat (08:30 / 10:45 / 12:00), "ReçeteKöprü · DURUM: KESİNTİ / STABİL", "L4-ALERT" / "L4-NORMAL". | dekoratif öğe, test edilmez |
+| 2 | **Giriş:** "NÖBET DEVRİ" etiketi, "Nöbetçi sensin" başlığı, "Önce seni tanıyalım…" açıklaması, "ANKET İLERLEMESİ 2 / 3" çubuğu, "3 sorunun hepsini cevapla" yardımcı metni, seviye seçeneklerinin alt açıklamaları ("Her kararda ipucu görürsün." vb.), rol ikonları. | dekoratif öğe, test edilmez |
+| 3 | **Sahne:** "Karar 1 / 3" ilerlemesi ve "KRİZ AŞAMASI" etiketi, "MİMARİ" kategori rozeti, izleme satırı ("Kuyruktaki reçete: 1.240 · Etkilenen eczane: 142 · HTTP 503"), seçeneklerdeki harf daireleri, tutor alt başlığı "Cevabı söylemez, düşünmeni sağlar.", çevrimiçi noktası, "T" avatarı, sürükleme tutamağı. | dekoratif öğe, test edilmez (izleme satırındaki sayılar §3 ile uyumlu) |
+| 4 | **Son ekranları, postmortem ve metrikler:** "POSTMORTEM #882" şeridi ("SEV-1 TERMINATED" / "ÇÖZÜLDÜ · STABİL"), "NÖBET SONU" etiketi ve saat rozeti, metrik ızgarası (Kötü: "42 dk 18 sn", "1.420 Adet"; İyi: "14 dk", "1.420 Adet"), "Kritik Bulgular · 2 Hata", "3/3 İncelendi" / "3/3 Başarılı", "Farklı kararlar alarak sistemi stabil tutmayı dene." metni. | dekoratif öğe, test edilmez. Ekrandaki "1.420" (§3'te 1.240) ve iyi sondaki "14 dk" (§3 K1-A'da geri dönüş 15 dk, toparlanma 20. dakika) spec'le çeliştiği için uygulamaya taşınmaz. |
+| 5 | **Son ekranları, karar satırı açıklamaları** ("kuyruk birikip veritabanı kilitlendi" vb.). | spec geçerli (karar özeti §3'teki seçimlerden üretilir, bkz. 10.3) |
+| 6 | **"Rolün için ders" metinleri** ("Belirtiyi değil kökü düzelt…", "Geri dönüş yolu bir güvenlik ağıdır…"): Spec kartı tanımlıyordu (`ending-role-lesson`) ama metinlerini vermiyordu. | spec'e eklendi (spec §4.3, rol × son türü tablosu) |
+| 7 | **Kötü son ekranında artık kalmış alt çubuk:** Giriş ekranından kalan pasif "Nöbeti devral" butonu ve "3 sorunun hepsini cevapla" metni. | Stitch'te düzeltildi (`design/son-kotu.png` ve `design/html/son-kotu.html` yenilendi) |
+| 8 | **"Yeniden oyna" betiği:** Buton metni "Sistem Sıfırlanıyor..." olur ve sayfa yenilenir (`window.location.reload()`). | spec'e eklendi (spec §4.5: sayfa yenilenmez, durum ve profil sıfırlanır, `Karsilama`'ya dönülür) |
+| 9 | **`<title>`:** Son ekranlarında da "SE Primer - Nöbet Devri" yazıyor. | dekoratif öğe, test edilmez |
 
 ### 10.2 Spec'te olup ekranda olmayan öğeler
 
-1. **Ekranlar:** E1 Karşılama (`start-button`), E3 Kriz brifingi (`briefing-text`, `briefing-role-message`, `briefing-continue`), E5 Sonuç ekranı (`outcome-what`, `outcome-why`, `outcome-timeout-note`, `outcome-deep` "Derinlemesine" bölümü, `outcome-continue`).
-2. **`data-testid`'ler:** Stitch HTML'lerinin hiçbirinde yok.
-3. **Sahne:** `hint-toggle` ("İpucu göster") butonu çizilmemiş. `tutor-open` butonu görünmüyor (panel açık çizildiği için tetikleyici yok). `tutor-loading` göstergesi yok.
-4. **Sahne, koşul çelişkisi:** Sayaç (yalnızca deneyimli) ile ipucu kartı (deneyimlide hiç yok) aynı anda gösteriliyor. Spec §2.1'e göre bu iki öğe aynı oyunda birlikte bulunamaz (bkz. §9).
-5. **Kötü son:** §3'teki **klinik sonuç notu** (ikinci çöküş nedeninde gösterilecek) ekranda yok.
-6. **İyi son:** *Kıl payı* İYİ durumu (#2, #3) için riskli kararı belirten bir öğe tasarlanmamış. Ekranda yalnızca temiz İYİ (#1) var.
-7. **Süre doldu notu:** Sahnede yok (E5'e ait). Son ekranında yalnızca "(süre doldu)" etiketi var.
+| # | Öğe | Karar |
+|---|---|---|
+| 1 | **Ekranlar:** E1 Karşılama (`start-button`), E3 Kriz brifingi (`briefing-text`, `briefing-role-message`, `briefing-continue`), E5 Sonuç ekranı (`outcome-what`, `outcome-why`, `outcome-timeout-note`, `outcome-deep` "Derinlemesine" bölümü, `outcome-continue`). | spec geçerli (ekranlar spec'e göre, bu belgedeki görsel dille yapılır) |
+| 2 | **`data-testid`'ler:** Stitch HTML'lerinin hiçbirinde yok. | spec geçerli (§8'deki adlar kullanılır) |
+| 3 | **Sahne:** `hint-toggle` ("İpucu göster") butonu, `tutor-open` butonu (panel açık çizildiği için tetikleyici yok) ve `tutor-loading` göstergesi çizilmemiş. | spec geçerli |
+| 4 | **Sahne, koşul çelişkisi:** Sayaç ile ipucu kartı aynı anda gösteriliyor. | spec geçerli (birbirini dışlar, spec §2.1; bkz. §9) |
+| 5 | **Kötü son:** §3'teki **klinik sonuç notu** (ikinci çöküş nedeninde gösterilecek) ekranda yok. | spec geçerli |
+| 6 | **İyi son:** *Kıl payı* İYİ durumu (#2, #3) için riskli kararı belirten bir öğe tasarlanmamış. Ekranda yalnızca temiz İYİ (#1) var. | spec geçerli |
+| 7 | **Süre doldu notu:** Sahnede yok (E5'e ait). Son ekranında yalnızca "(süre doldu)" etiketi var. | spec geçerli |
 
 ### 10.3 Metin farkları
 
-| Yer | Ekrandaki metin | spec.md'deki metin |
-|---|---|---|
-| Giriş, profil butonu | "Nöbeti devral" | "Devam" (§8 E2, `profile-submit`) |
-| Giriş, hedef seçeneği | "Mimari ve dağıtım kararları" | "Mimari / dağıtım kararları" (§2.3) |
-| Sahne, seçenek A | "A · Geri dön" / "v3.1 sürümüne rollback" | "Geri dön (v3.1'e rollback)" |
-| Sahne, seçenek B açıklaması | "Zaman aşımını kısalt, etkileşim kontrolünü atlanabilir yap" | "zaman aşımını kısalt, kontrolü atlanabilir yap" |
-| Son ekranları, tutor tetikleyici | "Tutor ile bu sonucu konuş" | "Tutor'u aç" (§8 E6) |
-| Kötü son, açıklama | "ReçeteKöprü 10:45'te ikinci kez çöktü ve ilaç ile tanı bilgisi içeren reçete logları ekip kanalına sızdı." | İki ayrı metin: "…10:45'te ikinci kez çöktü. İnsülin ve tansiyon ilacı bekleyen hastaların bir kısmı ilaçsız eve döndü." ve "İlaç ve tanı bilgisi içeren reçete logu, dış tedarikçi dahil 40 kişiye maskelenmeden gitti. Kurum ihlali KVK Kurulu'na bildirdi." (§4.3) |
-| Kötü son, K1 satırı | "Zaman aşımı düşürüldü, koruma atlandı; kuyruk birikip veritabanı kilitlendi." | Veritabanı kilitlenmesi yok. Neden: kapatılmayan bağlantılar ve tekrar deneme yükü, fail-open kontrol (§3 K1-B) |
-| Kötü son, K2 satırı | "…provizyon deserialization hatası yakalanamadı." | Deserialization hatası yok. Neden: devre kesici ayarlarının elle değiştirilen zaman aşımıyla çakışması, tekrar deneme fırtınası (§3 K2-B) |
-| İyi son, K1 satırı ve metrik | "…provizyon kilitlenmesi anında çözüldü." / "Kesinti süresi 14 dk" | Geri dönüş 15 dk sürer, bazı eczaneler 20. dakikada toparlanır (§3 K1-A) |
-| İyi son, K2 satırı | "Temel işlevler ve reçete provizyonu hızlı regresyon testiyle doğrulandı." | Staging'de 20 dk hedefli test (provizyon yavaş yanıt simülasyonu + yük). Devre kesicideki fail-open hatasını yakalar (§3 K2-A) |
-| Kötü / İyi son, etkilenen reçete | "1.420 Adet" | Kuyrukta 1.240 reçete (§3). 1.420 değeri spec'te yok |
-| Giriş ↔ sahne/son tutarlılığı | Girişte seçili rol "Test / QA mühendisi" | Sahne ve son ekranlarında rol "Backend geliştirici" gösteriliyor (örnek ekranlar farklı profillerle çizilmiş) |
+| Yer | Ekrandaki metin | spec.md'deki metin | Karar |
+|---|---|---|---|
+| Giriş, profil butonu | "Nöbeti devral" | "Devam" (§8 E2, `profile-submit`) | spec geçerli |
+| Giriş, hedef seçeneği | "Mimari ve dağıtım kararları" | "Mimari / dağıtım kararları" (§2.3) | spec geçerli |
+| Sahne, seçenek A | "A · Geri dön" / "v3.1 sürümüne rollback" | "Geri dön (v3.1'e rollback)" | spec geçerli |
+| Sahne, seçenek B açıklaması | "Zaman aşımını kısalt, etkileşim kontrolünü atlanabilir yap" | "zaman aşımını kısalt, kontrolü atlanabilir yap" | spec geçerli |
+| Son ekranları, tutor tetikleyici | "Tutor ile bu sonucu konuş" | "Tutor'u aç" (§8 E6) | spec geçerli |
+| Kötü son, açıklama | "ReçeteKöprü 10:45'te ikinci kez çöktü ve ilaç ile tanı bilgisi içeren reçete logları ekip kanalına sızdı." | Nedene göre iki ayrı metin (§4.3): ikinci çöküş ve KVKK ihlali | spec geçerli |
+| Kötü son, K1 satırı | "Zaman aşımı düşürüldü, koruma atlandı; kuyruk birikip veritabanı kilitlendi." | Veritabanı kilitlenmesi yok. Neden: kapatılmayan bağlantılar ve tekrar deneme yükü, fail-open kontrol (§3 K1-B) | spec geçerli |
+| Kötü son, K2 satırı | "…provizyon deserialization hatası yakalanamadı." | Deserialization hatası yok. Neden: devre kesici ayarlarının elle değiştirilen zaman aşımıyla çakışması, tekrar deneme fırtınası (§3 K2-B) | spec geçerli |
+| İyi son, K1 satırı ve metrik | "…provizyon kilitlenmesi anında çözüldü." / "Kesinti süresi 14 dk" | Geri dönüş 15 dk sürer, bazı eczaneler 20. dakikada toparlanır (§3 K1-A) | spec geçerli |
+| İyi son, K2 satırı | "Temel işlevler ve reçete provizyonu hızlı regresyon testiyle doğrulandı." | Staging'de 20 dk hedefli test (provizyon yavaş yanıt simülasyonu + yük), devre kesicideki fail-open hatasını yakalar (§3 K2-A) | spec geçerli |
+| Kötü / İyi son, etkilenen reçete | "1.420 Adet" | Kuyrukta 1.240 reçete (§3). 1.420 değeri spec'te yok | dekoratif öğe, test edilmez. Spec'le çelişen sayı uygulamaya taşınmaz. |
+| Giriş ↔ sahne/son tutarlılığı | Girişte seçili rol "Test / QA mühendisi" | Sahne ve son ekranlarında rol "Backend geliştirici" (örnek ekranlar farklı profillerle çizilmiş) | spec geçerli (rol kartı ve ders metni seçilen role göre §2.2 ve §4.3'ten gelir) |
