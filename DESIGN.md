@@ -276,7 +276,8 @@ Her maddenin kararı dört seçenekten biridir:
 | # | Öğe | Karar |
 |---|---|---|
 | 1 | **Üst çubuk ve durum şeridi** (tüm ekranlar): "SE Primer", saat (08:30 / 10:45 / 12:00), "ReçeteKöprü · DURUM: KESİNTİ / STABİL", "L4-ALERT" / "L4-NORMAL". | dekoratif öğe, test edilmez |
-| 2 | **Giriş:** "NÖBET DEVRİ" etiketi, "Nöbetçi sensin" başlığı, "Önce seni tanıyalım…" açıklaması, "ANKET İLERLEMESİ 2 / 3" çubuğu, "3 sorunun hepsini cevapla" yardımcı metni, seviye seçeneklerinin alt açıklamaları ("Her kararda ipucu görürsün." vb.), rol ikonları. | dekoratif öğe, test edilmez |
+| 2a | **Giriş, ekran metinleri:** "Nöbetçi sensin" başlığı, "3 sorunun hepsini cevapla" yardımcı metni, "Nöbeti devral" butonu. | spec'e eklendi (spec §2: başlık "Nöbetçi sensin", yönerge "Devam etmek için 3 sorunun hepsini cevapla", buton "Nöbeti devral") |
+| 2b | **Giriş, diğer öğeler:** "NÖBET DEVRİ" etiketi, "Önce seni tanıyalım…" açıklaması, "ANKET İLERLEMESİ 2 / 3" çubuğu, seviye seçeneklerinin alt açıklamaları ("Her kararda ipucu görürsün." vb.), rol ikonları. | dekoratif öğe, test edilmez |
 | 3 | **Sahne:** "Karar 1 / 3" ilerlemesi ve "KRİZ AŞAMASI" etiketi, "MİMARİ" kategori rozeti, izleme satırı ("Kuyruktaki reçete: 1.240 · Etkilenen eczane: 142 · HTTP 503"), seçeneklerdeki harf daireleri, tutor alt başlığı "Cevabı söylemez, düşünmeni sağlar.", çevrimiçi noktası, "T" avatarı, sürükleme tutamağı. | dekoratif öğe, test edilmez (izleme satırındaki sayılar §3 ile uyumlu) |
 | 4 | **Son ekranları, postmortem ve metrikler:** "POSTMORTEM #882" şeridi ("SEV-1 TERMINATED" / "ÇÖZÜLDÜ · STABİL"), "NÖBET SONU" etiketi ve saat rozeti, metrik ızgarası (Kötü: "42 dk 18 sn", "1.420 Adet"; İyi: "14 dk", "1.420 Adet"), "Kritik Bulgular · 2 Hata", "3/3 İncelendi" / "3/3 Başarılı", "Farklı kararlar alarak sistemi stabil tutmayı dene." metni. | dekoratif öğe, test edilmez. Ekrandaki "1.420" (§3'te 1.240) ve iyi sondaki "14 dk" (§3 K1-A'da geri dönüş 15 dk, toparlanma 20. dakika) spec'le çeliştiği için uygulamaya taşınmaz. |
 | 5 | **Son ekranları, karar satırı açıklamaları** ("kuyruk birikip veritabanı kilitlendi" vb.). | spec geçerli (karar özeti §3'teki seçimlerden üretilir, bkz. 10.3) |
@@ -301,7 +302,8 @@ Her maddenin kararı dört seçenekten biridir:
 
 | Yer | Ekrandaki metin | spec.md'deki metin | Karar |
 |---|---|---|---|
-| Giriş, profil butonu | "Nöbeti devral" | "Devam" (§8 E2, `profile-submit`) | spec geçerli |
+| Giriş, profil butonu | "Nöbeti devral" | Önceden "Devam" idi, artık "Nöbeti devral" (§2 ve §8 E2, `profile-submit`) | spec'e eklendi |
+| Giriş, yönerge | "3 sorunun hepsini cevapla" | "Devam etmek için 3 sorunun hepsini cevapla" (§2) | spec'e eklendi (uygulamada spec metni kullanılır) |
 | Giriş, hedef seçeneği | "Mimari ve dağıtım kararları" | "Mimari / dağıtım kararları" (§2.3) | spec geçerli |
 | Sahne, seçenek A | "A · Geri dön" / "v3.1 sürümüne rollback" | "Geri dön (v3.1'e rollback)" | spec geçerli |
 | Sahne, seçenek B açıklaması | "Zaman aşımını kısalt, etkileşim kontrolünü atlanabilir yap" | "zaman aşımını kısalt, kontrolü atlanabilir yap" | spec geçerli |

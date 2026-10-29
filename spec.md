@@ -26,6 +26,11 @@ Yazılım mühendisliği öğrencileri mimari, test ve veri güvenliği kararlar
 
 Oyun başında profil ekranında **3 soru** sorulur. Cevaplar oturum boyunca bellekte tutulur, hiçbir yere kaydedilmez.
 
+**Profil ekranı metinleri (E2):**
+- Başlık: "Nöbetçi sensin"
+- Yönerge: "Devam etmek için 3 sorunun hepsini cevapla"
+- Buton (`profile-submit`): "Nöbeti devral"
+
 ### 2.1 Soru 1 — Seviye: "Yazılım mühendisliğinde ne kadar deneyimlisin?"
 
 | Cevap | İpucu | Süre sınırı | Tutor |
@@ -249,6 +254,7 @@ KÖTÜ  ⇔  (k3 = ham)  VEYA  (k1 = yama VE k2 = hemen)
 
 - `restart-button` sayfayı **yenilemez** (`location.reload()` kullanılmaz).
 - Oyun durumu (`k1`, `k2`, `k3`, her karar için `zamanAsimi`, sayaç) ve profil (`seviye`, `rol`, `hedef`) sıfırlanır.
+- Tutor mesaj geçmişi sıfırlanır.
 - Oyun `Karsilama` durumuna (E1) döner.
 
 ---
@@ -384,7 +390,7 @@ Tüm örnekler Cypress ile mobil görünümde (`cy.viewport('iphone-x')`) ve §8
 | Hedef: Mimari / dağıtım | `goal-architecture` |
 | Hedef: Test stratejisi | `goal-testing` |
 | Hedef: KVKK ve veri güvenliği | `goal-kvkk` |
-| Devam (3 soru cevaplanmadan pasiftir) | `profile-submit` |
+| "Nöbeti devral" butonu (3 soru cevaplanmadan pasiftir) | `profile-submit` |
 
 ### E3 — Kriz brifingi
 
