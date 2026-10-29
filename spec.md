@@ -319,7 +319,9 @@ Tüm örnekler Cypress ile mobil görünümde (`cy.viewport('iphone-x')`) ve §8
 
 ### AK-1 — Kişiselleştirme: yeni başlayan oyuncu ipucu görür, süre sınırı yoktur
 
-- **Given** oyuncu profil ekranında `level-beginner`, `role-backend` ve `goal-architecture` seçip `profile-submit`'e basmıştır,
+- **Given** oyuncu profil ekranındadır ve yalnızca `level-beginner` ile `role-backend`'i seçmiştir,
+- **And** bu durumda `profile-submit` pasiftir (`disabled`), çünkü 3 sorudan biri cevaplanmamıştır,
+- **And** oyuncu `goal-architecture`'ı seçince `profile-submit` aktif olur ve oyuncu ona basar,
 - **When** brifingde `briefing-continue`'ya basıp K1 ekranına gelir,
 - **Then**
   - `hint-box` görünür ve boş değildir,
