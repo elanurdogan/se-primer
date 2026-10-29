@@ -126,7 +126,7 @@ Rule: **BAD ⇔ (k3 = ham) OR (k1 = yama AND k2 = hemen)**. Otherwise GOOD.
 | 7 | yama | test | ham | **BAD** | KVKK |
 | 8 | yama | hemen | ham | **BAD** | crash + KVKK |
 
-- On BAD, show **every** reason that applies: the crash reason (`ending-reason-crash`) holds `endings.badCrash` followed by `endings.clinicalNote`; the KVKK reason (`ending-reason-kvkk`) holds `endings.badKvkk`. Render a reason element **only** if it applies (otherwise it must not be in the DOM).
+- On BAD, show **every** reason that applies: the crash reason (`ending-reason-crash`) holds `endings.badCrash`, then `endings.badCrashPatientImpact` in its own element with `data-testid="ending-patient-impact"`, then `endings.clinicalNote`; the KVKK reason (`ending-reason-kvkk`) holds `endings.badKvkk`. Render a reason element **only** if it applies (otherwise it must not be in the DOM).
 - On a close-call GOOD (#2, #3), show `endings.good` and, below it, the matching close-call note that names the risky decision.
 - Decisions made by timeout count like normal decisions and are labeled "(süre doldu)" in the summary.
 
@@ -144,7 +144,7 @@ Rule: **BAD ⇔ (k3 = ham) OR (k1 = yama AND k2 = hemen)**. Otherwise GOOD.
 
 - **The hint card and the timer are mutually exclusive.** They never appear together on any decision screen. "Not rendered" means the element is absent from the DOM, not just hidden.
 - The timer starts at 60 on every decision screen and resets only when leaving the decision screen. It keeps running while the tutor panel is open. At 0, the decision's **risky option is applied automatically** (K1 → yama, K2 → hemen, K3 → ham), `zamanAsimi = true`, and the game moves to the outcome screen.
-- On a timed-out outcome screen, show `outcome-timeout-note` with the text "Süre doldu" above the normal texts. In that case `outcome-what` shows the decision's `timeout.what` text followed by the risky option's normal `what` text (for K2, use the variant that matches K1). `outcome-why` shows `timeout.why` (if defined) followed by the risky option's normal `why` text.
+- On a timed-out outcome screen, show the `outcome-timeout-note` container above the normal texts. Inside it, a separate element with `data-testid="timeout-notice"` carries the text `CONTENT.common.timeoutNote` ("Süre doldu"). Neither is rendered when the decision did not time out. In that case `outcome-what` shows the decision's `timeout.what` text followed by the risky option's normal `what` text (for K2, use the variant that matches K1). `outcome-why` shows `timeout.why` (if defined) followed by the risky option's normal `why` text.
 
 **Role** (`rol`) changes only: the first message on the briefing screen, the role card on each decision screen, the tutor's framing (sent as context), and the "Rolün için ders" text on the ending.
 
@@ -212,7 +212,8 @@ E4 Karar (shared template for K1, K2, K3)
 E5 Sonuç (S1, S2, S3)
 | Element | data-testid |
 |---|---|
-| "Süre doldu" note *(display, timeout only)* | `outcome-timeout-note` |
+| "Süre doldu" note container *(display, timeout only)* | `outcome-timeout-note` |
+| "Süre doldu" notice, separate element inside the note *(display, timeout only)* | `timeout-notice` |
 | Ne oldu? *(display)* | `outcome-what` |
 | Neden oldu? *(display)* | `outcome-why` |
 | Derinlemesine section (collapsible, focus decision only) | `outcome-deep` |
@@ -225,6 +226,7 @@ E6 Son
 | GOOD ending container *(display)* | `ending-good` |
 | BAD ending container *(display)* | `ending-bad` |
 | Reason: second crash *(display)* | `ending-reason-crash` |
+| Patient impact sentence, inside the crash reason *(display)* | `ending-patient-impact` |
 | Reason: KVKK breach *(display)* | `ending-reason-kvkk` |
 | Decision summary (3 rows, focus decision first) *(display)* | `ending-summary` |
 | Role lesson *(display)* | `ending-role-lesson` |

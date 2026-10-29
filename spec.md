@@ -335,7 +335,7 @@ Tüm örnekler Cypress ile mobil görünümde (`cy.viewport('iphone-x')`) ve §8
 - **When** hiçbir seçeneğe basmadan `cy.tick(60000)` ile 60 saniye geçer,
 - **Then**
   - S1 sonuç ekranı açılır ve `outcome-timeout-note` görünür,
-  - `outcome-what` "atlanabilir" metnini içerir (k1 = yama uygulanmıştır),
+  - `timeout-notice` görünür,
   - K1 ekranında `hint-box` ve `hint-toggle` hiç gösterilmemiştir.
 
 ### AK-3 — Son yolu: tüm güvenli kararlar İYİ sona gider
@@ -354,7 +354,7 @@ Tüm örnekler Cypress ile mobil görünümde (`cy.viewport('iphone-x')`) ve §8
 - **Then**
   - S2 ekranındaki `outcome-what` "10:45" metnini içermiştir,
   - son ekranında `ending-bad` görünür,
-  - `ending-reason-crash` görünür ve "insülin" metnini içerir,
+  - `ending-reason-crash` görünür ve içindeki `ending-patient-impact` görünür ve boş değildir,
   - `ending-reason-kvkk` yoktur.
 
 ### AK-5 — Tutor: ısrarlı cevap talebinde cevabı ele vermez, soruyla döner
@@ -423,6 +423,7 @@ Tüm örnekler Cypress ile mobil görünümde (`cy.viewport('iphone-x')`) ve §8
 | Öğe | `data-testid` |
 |---|---|
 | "Süre doldu" notu *(gösterim, yalnızca zaman aşımında)* | `outcome-timeout-note` |
+| Süre doldu uyarısı: "Süre doldu" metnini taşıyan ayrı öğe *(gösterim, yalnızca zaman aşımında)* | `timeout-notice` |
 | Ne oldu? *(gösterim)* | `outcome-what` |
 | Neden oldu? *(gösterim)* | `outcome-why` |
 | Derinlemesine bölümü (açılır/kapanır, yalnızca odak kararda) | `outcome-deep` |
@@ -436,6 +437,7 @@ Tüm örnekler Cypress ile mobil görünümde (`cy.viewport('iphone-x')`) ve §8
 | İYİ son kapsayıcısı *(gösterim)* | `ending-good` |
 | KÖTÜ son kapsayıcısı *(gösterim)* | `ending-bad` |
 | Neden: ikinci çöküş *(gösterim)* | `ending-reason-crash` |
+| Hastalara etki cümlesi, `ending-reason-crash` içinde *(gösterim)* | `ending-patient-impact` |
 | Neden: KVKK ihlali *(gösterim)* | `ending-reason-kvkk` |
 | Karar özeti (3 satır, odak karar ilk sırada) *(gösterim)* | `ending-summary` |
 | Rolün için ders *(gösterim)* | `ending-role-lesson` |

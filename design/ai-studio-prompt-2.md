@@ -193,7 +193,8 @@ export const CONTENT = {
       geriHemen: "Kıl payı: geri dönüş yolu kurtardı, kontrolsüz reçeteler elle gözden geçirildi",
       yamaTest: "Kıl payı: test fail-open hatasını yakaladı, yama süresince kontrolsüz karşılanan reçeteler sonradan tarandı",
     },
-    badCrash: "ReçeteKöprü 10:45'te ikinci kez çöktü. İnsülin ve tansiyon ilacı bekleyen hastaların bir kısmı ilaçsız eve döndü.",
+    badCrash: "ReçeteKöprü 10:45'te ikinci kez çöktü.",
+    badCrashPatientImpact: "İnsülin ve tansiyon ilacı bekleyen hastaların bir kısmı ilaçsız eve döndü.",
     clinicalNote: "İnsülin dozu geciken diyabet hastalarında kan şekeri kontrolü bozulabilir. Tansiyon ilacı aniden kesilen hastalarda kan basıncı hızla yükselebilir. Bu yüzden kronik hasta ilacındaki gecikme yalnızca bir \"bekleme süresi\" değil, klinik bir risktir.",
     badKvkk: "İlaç ve tanı bilgisi içeren reçete logu, dış tedarikçi dahil 40 kişiye maskelenmeden gitti. Kurum ihlali KVK Kurulu'na bildirdi.",
     roleLesson: {
