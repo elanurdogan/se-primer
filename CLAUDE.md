@@ -51,6 +51,11 @@ se-primer/
 3. **data-testid:** Her etkileşimli UI öğesinin (buton, input, seçenek, link, tutor giriş alanı vb.) bir `data-testid` özniteliği olur; Cypress testleri bu seçicilerle yazılır.
 4. **Eval etiketlemesi:** Tutor eval’indeki 20 cevabın etiketlemesini **model yapmaz, kullanıcı yapar.** Model yalnızca etiketleme şablonunu/dosyasını hazırlayabilir; etiket alanlarını boş bırakır ve doldurmaz, tahmin önermez.
 
+## Çalışma kuralları
+
+- Sürüm çakışması, eksik paket, yapılandırma hatası gibi teknik engellerde model en kalıcı çözümü kendisi seçer, uygular ve özette tek satırla belirtir.
+- Model yalnızca kullanıcının yapması gereken işlerde (tarayıcı, API anahtarı, eval etiketlemesi) ya da ödev kapsamını değiştiren kararlarda durup sorar.
+
 ## Notlar
 
 - `cypress/videos/` git’e eklenmez; yalnızca final demo videosu (`cypress/videos/final-demo.mp4`) istisnadır.

@@ -1,0 +1,6 @@
+{
+  "name": "SE Primer",
+  "description": "Yazılım mühendisliği öğrencileri için kriz yönetim simülasyonu ve Sokratik yapay zeka rehberi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
