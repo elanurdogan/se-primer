@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SE Primer - Nöbet Devri</title>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            appBg: '#0B1B33',
+            cardSurface: '#13294B',
+            selectedSurface: '#1C3A66',
+            appBorder: '#2A4A7A',
+            accentOrange: '#F28C28',
+            primaryText: '#F2F5FA',
+            secondaryText: '#9FB0C8',
+            successGreen: '#2FB67C',
+            dangerRed: '#E5484D',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0B1B33;
+      color: #F2F5FA;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      justify-content: center;
+    }
+    .mobile-container {
+      width: 390px;
+      min-height: 844px;
+      background-color: #0B1B33;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
+    .status-dot-blink {
+      animation: blink 1.4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 flex justify-center">
+
+  <div class="mobile-container flex flex-col justify-between overflow-x-hidden text-[#F2F5FA]">
+    
+    <!-- TOP SECTION: HEADER & STICKY STATUS -->
+    <header class="sticky top-0 z-30 bg-[#0B1B33]/95 backdrop-blur-sm border-b border-[#2A4A7A]">
+      <!-- Top Bar -->
+      <div class="h-12 px-4 flex items-center justify-between">
+        <!-- Brand Left -->
+        <div class="flex items-center gap-2">
+          <!-- Pharmacy Plus / Cross Icon in Orange -->
+          <svg class="w-4 h-4 text-[#F28C28]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span class="font-semibold text-sm tracking-wide text-[#F2F5FA]">SE Primer</span>
+        </div>
+        <!-- Time Right -->
+        <div class="font-mono text-xs text-[#9FB0C8] tracking-wider">
+          08:30
+        </div>
+      </div>
+
+      <!-- On-Call Status Strip -->
+      <div class="bg-[#0B1B33] border-t border-[#2A4A7A]/60 px-4 py-1.5 flex items-center justify-between font-mono text-[11px] text-[#9FB0C8]">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-[#F28C28] status-dot-blink"></span>
+          <span class="tracking-tight">ReçeteKöprü · DURUM: KESİNTİ</span>
+        </div>
+        <span class="text-[#9FB0C8]/60 text-[10px]">L4-ALERT</span>
+      </div>
+    </header>
+
+    <!-- MAIN SCROLLABLE CONTENT -->
+    <main class="flex-1 px-4 pt-5 pb-36 flex flex-col gap-6">
+      
+      <!-- 2. Screen Intro -->
+      <div>
+        <div class="text-[13px] font-medium text-[#F28C28] uppercase tracking-wider mb-1">
+          NÖBET DEVRİ
+        </div>
+        <h1 class="text-[24px] font-bold leading-tight text-[#F2F5FA] mb-2">
+          Nöbetçi sensin
+        </h1>
+        <p class="text-[15px] text-[#9FB0C8] leading-relaxed">
+          Önce seni tanıyalım. Cevapların oyunu sana göre ayarlar, hiçbir yere kaydedilmez.
+        </p>
+      </div>
+
+      <!-- 3. Progress Indicator: 3 segments (2 answered = orange, 1 pending = dark/unanswered) -->
+      <div class="flex flex-col gap-1.5">
+        <div class="flex items-center justify-between text-[11px] font-mono text-[#9FB0C8]">
+          <span>ANKET İLERLEMESİ</span>
+          <span class="text-[#F28C28]">2 / 3</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 w-full h-1.5">
+          <div class="h-full bg-[#F28C28] rounded-full"></div>
+          <div class="h-full bg-[#F28C28] rounded-full"></div>
+          <div class="h-full bg-[#1C3A66] rounded-full border border-[#2A4A7A]/60"></div>
+        </div>
+      </div>
+
+      <!-- 4. Question 1 -->
+      <section class="flex flex-col gap-3">
+        <h2 class="text-[17px] font-semibold text-[#F2F5FA] leading-snug">
+          Yazılım mühendisliğinde ne kadar deneyimlisin?
+        </h2>
+
+        <div class="flex flex-col gap-2.5">
+          <!-- Option 1: Unselected -->
+          <div class="bg-[#13294B] border border-[#2A4A7A] rounded-[12px] p-3.5 min-h-[58px] flex items-center justify-between cursor-pointer transition-colors hover:border-[#9FB0C8]/40">
+            <div class="pr-2">
+              <div class="text-[15px] font-medium text-[#F2F5FA]">Yeni başladım</div>
+              <div class="text-[13px] text-[#9FB0C8] mt-0.5">Her kararda ipucu görürsün.</div>
+            </div>
+            <div class="w-5 h-5 rounded-full border border-[#2A4A7A] flex-shrink-0"></div>
+          </div>
+
+          <!-- Option 2: Selected -->
+          <div class="bg-[#1C3A66] border-2 border-[#F28C28] rounded-[12px] p-3.5 min-h-[58px] flex items-center justify-between relative cursor-pointer">
+            <div class="pr-2">
+              <div class="text-[15px] font-semibold text-[#F2F5FA]">Biraz deneyimim var</div>
+              <div class="text-[13px] text-[#9FB0C8] mt-0.5">İstersen ipucu açabilirsin.</div>
+            </div>
+            <!-- Orange Checkmark on the right -->
+            <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center">
+              <svg class="w-5 h-5 text-[#F28C28]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 10.5 8 14.5 16 6"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Option 3: Unselected -->
+          <div class="bg-[#13294B] border border-[#2A4A7A] rounded-[12px] p-3.5 min-h-[58px] flex items-center justify-between cursor-pointer transition-colors hover:border-[#9FB0C8]/40">
+            <div class="pr-2">
+              <div class="text-[15px] font-medium text-[#F2F5FA]">Deneyimliyim</div>
+              <div class="text-[13px] text-[#9FB0C8] mt-0.5">İpucu yok, her karar için 60 saniyen var.</div>
+            </div>
+            <div class="w-5 h-5 rounded-full border border-[#2A4A7A] flex-shrink-0"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Question 2 -->
+      <section class="flex flex-col gap-3">
+        <h2 class="text-[17px] font-semibold text-[#F2F5FA] leading-snug">
+          Bu krizde hangi roldesin?
+        </h2>
+
+        <div class="flex flex-col gap-2.5">
+          <!-- Backend Developer (server icon) -->
+          <div class="bg-[#13294B] border border-[#2A4A7A] rounded-[12px] p-3.5 min-h-[52px] flex items-center justify-between cursor-pointer transition-colors hover:border-[#9FB0C8]/40">
+            <div class="flex items-center gap-3">
+              <!-- Server Icon -->
+              <svg class="w-5 h-5 text-[#9FB0C8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="7" rx="2" ry="2"></rect>
+                <rect x="2" y="14" width="20" height="7" rx="2" ry="2"></rect>
+                <line x1="6" y1="6.5" x2="6.01" y2="6.5"></line>
+                <line x1="6" y1="17.5" x2="6.01" y2="17.5"></line>
+              </svg>
+              <span class="text-[15px] font-medium text-[#F2F5FA]">Backend geliştirici</span>
+            </div>
+            <div class="w-5 h-5 rounded-full border border-[#2A4A7A] flex-shrink-0"></div>
+          </div>
+
+          <!-- QA Engineer (checklist icon) - SELECTED -->
+          <div class="bg-[#1C3A66] border-2 border-[#F28C28] rounded-[12px] p-3.5 min-h-[52px] flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-3">
+              <!-- Checklist / Test Icon -->
+              <svg class="w-5 h-5 text-[#F28C28]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"></path>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+              </svg>
+              <span class="text-[15px] font-semibold text-[#F2F5FA]">Test / QA mühendisi</span>
+            </div>
+            <!-- Orange Checkmark on the right -->
+            <div class="w-5 h-5 flex-shrink-0 flex items-center justify-center">
+              <svg class="w-5 h-5 text-[#F28C28]" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 10.5 8 14.5 16 6"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Project Manager (clipboard icon) -->
+          <div class="bg-[#13294B] border border-[#2A4A7A] rounded-[12px] p-3.5 min-h-[52px] flex items-center justify-between cursor-pointer transition-colors hover:border-[#9FB0C8]/40">
+            <div class="flex items-center gap-3">
+              <!-- Clipboard Icon -->
+              <svg class="w-5 h-5 text-[#9FB0C8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              </svg>
+              <span class="text-[15px] font-medium text-[#F2F5FA]">Proje yöneticisi</span>
+            </div>
+            <div class="w-5 h-5 rounded-full border border-[#2A4A7A] flex-shrink-0"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Question 3 -->
+      <section class="flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+          <h2 class="text-[17px] font-semibold text-[#F2F5FA] leading-snug">
+            Bu oyundan en çok ne öğrenmek istiyorsun?
+          </h2>
+        </div>
+
+        <div class="flex flex-col gap-2.5">
+          <!-- Option 1 -->
+          <div class="bg-[#13294B] border border-[#2A4A7A] rounded-[12px] p-3.5 min-h-[50px] flex items-center justify-between cursor-pointer transition-colors hover:border-[#9FB0C8]/40">
+            <span class="text-[15px] font-medium text-[#F2F5FA]">Mimari ve dağıtım kararları</span>
+            <div class="w-5 h-5 rounded-full border border-[#2A4A7A] flex-shrink-0"></div>
+          </div>
+
+          <!-- Option 2 -->
+          <div class="bg-[#13294B] border border-[#2A4A7A] rounded-[12px] p-3.5 min-h-[50px] flex items-center justify-between cursor-pointer transition-colors hover:border-[#9FB0C8]/40">
+            <span class="text-[15px] font-medium text-[#F2F5FA]">Test stratejisi</span>
+            <div class="w-5 h-5 rounded-full border border-[#2A4A7A] flex-shrink-0"></div>
+          </div>
+
+          <!-- Option 3 (None selected yet) -->
+          <div class="bg-[#13294B] border border-[#2A4A7A] rounded-[12px] p-3.5 min-h-[50px] flex items-center justify-between cursor-pointer transition-colors hover:border-[#9FB0C8]/40">
+            <span class="text-[15px] font-medium text-[#F2F5FA]">KVKK ve veri güvenliği</span>
+            <div class="w-5 h-5 rounded-full border border-[#2A4A7A] flex-shrink-0"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 7. STICKY BOTTOM BUTTON & HELPER TEXT -->
+    <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-[390px] bg-[#0B1B33]/95 backdrop-blur-md border-t border-[#2A4A7A] p-4 flex flex-col items-center gap-2 z-40">
+      <!-- Disabled Primary Button: 52px, orange fill, 12px radius, 40% opacity -->
+      <button 
+        disabled 
+        class="w-full h-[52px] rounded-[12px] bg-[#F28C28] text-[#0B1B33] font-semibold text-[15px] tracking-wide flex items-center justify-center opacity-40 cursor-not-allowed select-none">
+        Nöbeti devral
+      </button>
+
+      <!-- Secondary Helper Text -->
+      <div class="text-[13px] text-[#9FB0C8] font-normal">
+        3 sorunun hepsini cevapla
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

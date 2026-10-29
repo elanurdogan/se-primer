@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>SE Primer - Nöbet Devri</title>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            appBg: '#0B1B33',
+            cardSurface: '#13294B',
+            selectedSurface: '#1C3A66',
+            appBorder: '#2A4A7A',
+            accentOrange: '#F28C28',
+            primaryText: '#F2F5FA',
+            secondaryText: '#9FB0C8',
+            successGreen: '#2FB67C',
+            dangerRed: '#E5484D',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #0B1B33;
+      color: #F2F5FA;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      justify-content: center;
+    }
+    .mobile-container {
+      width: 390px;
+      min-height: 844px;
+      background-color: #0B1B33;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
+    .status-dot-blink {
+      animation: blink 1.4s ease-in-out infinite;
+    }
+  </style>
+<meta content="mobile_stack" name="shell-type"/></head>
+<body class="bg-slate-950 flex justify-center">
+<div class="mobile-container flex flex-col justify-between overflow-x-hidden text-[#F2F5FA]">
+<!-- TOP SECTION: HEADER & STICKY STATUS -->
+<header class="sticky top-0 z-30 bg-[#0B1B33]/95 backdrop-blur-sm border-b border-[#2A4A7A]">
+<!-- Top Bar -->
+<div class="h-12 px-4 flex items-center justify-between">
+<!-- Brand Left -->
+<div class="flex items-center gap-2">
+<!-- Pharmacy Plus / Cross Icon in Orange -->
+<svg class="w-4 h-4 text-[#F28C28]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24">
+<line x1="12" x2="12" y1="5" y2="19"></line>
+<line x1="5" x2="19" y1="12" y2="12"></line>
+</svg>
+<span class="font-semibold text-sm tracking-wide text-[#F2F5FA]">SE Primer</span>
+</div>
+<!-- Time Right -->
+<div class="font-mono text-xs text-[#9FB0C8] tracking-wider">
+          08:30
+        </div>
+</div>
+<!-- On-Call Status Strip -->
+<div class="bg-[#0B1B33] border-t border-[#2A4A7A]/60 px-4 py-1.5 flex items-center justify-between font-mono text-[11px] text-[#9FB0C8]">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-[#F28C28] status-dot-blink"></span>
+<span class="tracking-tight">ReçeteKöprü · DURUM: KESİNTİ</span>
+</div>
+<span class="text-[#9FB0C8]/60 text-[10px]">L4-ALERT</span>
+</div>
+</header>
+<!-- MAIN SCROLLABLE CONTENT -->
+<main class="flex-1 px-4 pt-5 pb-36 flex flex-col gap-6"><div class="flex flex-col w-full">
+<!-- System Diagnostic Header / Secondary Live Incident Info -->
+<div class="flex items-center justify-between font-mono text-[11px] text-[#9FB0C8] bg-[#13294B] px-3.5 py-2 rounded-xl mb-4 shadow-sm">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-[#E5484D] animate-ping"></span>
+<span class="text-[#F2F5FA] font-medium tracking-tight">POSTMORTEM #882</span>
+</div>
+<span class="text-[#E5484D] font-mono tracking-wider font-semibold">SEV-1 TERMINATED</span>
+</div>
+<!-- 2. RESULT HEADER CARD -->
+<section class="relative bg-[#13294B] rounded-xl overflow-hidden shadow-xl mb-5">
+<!-- 4px Danger-Red Horizontal Stripe -->
+<div class="h-1 w-full bg-[#E5484D]"></div>
+<div class="p-4 flex flex-col gap-3">
+<!-- Danger row -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-[#E5484D]">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span class="font-mono text-xs font-semibold tracking-wider">NÖBET SONU</span>
+</div>
+<span class="font-mono text-xs font-semibold bg-[#E5484D]/15 text-[#E5484D] px-2 py-0.5 rounded">
+          10:45
+        </span>
+</div>
+<!-- Main Result Title -->
+<h1 class="text-2xl font-bold text-[#F2F5FA] tracking-tight leading-none">
+        Kötü son
+      </h1>
+<!-- Subtext -->
+<p class="text-[14px] text-[#9FB0C8] leading-relaxed font-normal">
+        ReçeteKöprü 10:45'te ikinci kez çöktü ve ilaç ile tanı bilgisi içeren reçete logları ekip kanalına sızdı.
+      </p>
+<!-- Mini Telemetry Metric Grid -->
+<div class="grid grid-cols-2 gap-2 pt-2">
+<div class="bg-[#0B1B33] p-2.5 rounded-lg flex flex-col">
+<span class="text-[10px] font-mono text-[#9FB0C8] uppercase tracking-wider">Kesinti Süresi</span>
+<span class="text-base font-mono font-semibold text-[#E5484D]">42 dk 18 sn</span>
+</div>
+<div class="bg-[#0B1B33] p-2.5 rounded-lg flex flex-col">
+<span class="text-[10px] font-mono text-[#9FB0C8] uppercase tracking-wider">Etkilenen Reçete</span>
+<span class="text-base font-mono font-semibold text-[#F28C28]">1.420 Adet</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. REASONS SECTION -->
+<section class="flex flex-col gap-2.5 mb-6">
+<div class="flex items-center justify-between px-1">
+<span class="font-mono text-[11px] tracking-wider uppercase text-[#9FB0C8]">Kritik Bulgular</span>
+<span class="font-mono text-[11px] text-[#E5484D]">2 Hata</span>
+</div>
+<!-- Reason Row 1 -->
+<div class="bg-[#E5484D]/[0.08] p-3 rounded-xl flex items-start gap-3 shadow-sm">
+<span class="material-symbols-outlined text-[#E5484D] text-[18px] shrink-0 mt-0.5">error</span>
+<p class="text-[13px] text-[#F2F5FA] leading-snug font-normal">
+        İkinci çöküş — canlıda yama + testsiz yayın; insülin bekleyen hastaların bir kısmı ilaçsız döndü
+      </p>
+</div>
+<!-- Reason Row 2 -->
+<div class="bg-[#E5484D]/[0.08] p-3 rounded-xl flex items-start gap-3 shadow-sm">
+<span class="material-symbols-outlined text-[#E5484D] text-[18px] shrink-0 mt-0.5">lock_open</span>
+<p class="text-[13px] text-[#F2F5FA] leading-snug font-normal">
+        KVKK ihlali — ilaç ve tanı kodu içeren log maskelenmeden 40 kişiye gönderildi
+      </p>
+</div>
+</section>
+<!-- 4. DECISION SUMMARY ("Kararların") -->
+<section class="flex flex-col gap-3 mb-6">
+<div class="flex items-center justify-between px-1">
+<h2 class="text-[17px] font-semibold text-[#F2F5FA] tracking-tight">Kararların</h2>
+<span class="text-[12px] font-mono text-[#9FB0C8]">3/3 İncelendi</span>
+</div>
+<div class="flex flex-col gap-2.5">
+<!-- Row 1: Focused / Odak -->
+<div class="bg-[#1C3A66] rounded-xl p-3.5 relative overflow-hidden shadow-md flex items-start gap-3">
+<!-- Orange accent left indicator -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-[#F28C28]"></div>
+<div class="w-6 h-6 rounded-full bg-[#0B1B33] flex items-center justify-center shrink-0 font-mono text-xs font-semibold text-[#F28C28] mt-0.5">
+          1
+        </div>
+<div class="flex-1 min-w-0 pr-2">
+<div class="flex items-center justify-between gap-1 mb-1">
+<span class="font-medium text-[14px] text-[#F2F5FA] truncate">Mimari — Canlıda yama</span>
+<span class="bg-[#F28C28] text-[#0B1B33] text-[9px] font-mono font-bold tracking-wider px-1.5 py-0.5 rounded shrink-0">ODAK</span>
+</div>
+<p class="text-[12px] text-[#9FB0C8] leading-relaxed">
+            Zaman aşımı düşürüldü, koruma atlandı; kuyruk birikip veritabanı kilitlendi.
+          </p>
+</div>
+<span class="w-2 h-2 rounded-full bg-[#F28C28] shrink-0 mt-2"></span>
+</div>
+<!-- Row 2 -->
+<div class="bg-[#13294B] rounded-xl p-3.5 shadow-sm flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-[#0B1B33] flex items-center justify-center shrink-0 font-mono text-xs font-semibold text-[#9FB0C8] mt-0.5">
+          2
+        </div>
+<div class="flex-1 min-w-0 pr-2">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="font-medium text-[14px] text-[#F2F5FA]">Test — Hemen yayına al</span>
+<span class="text-[11px] font-mono text-[#E5484D] tracking-tight">(süre doldu)</span>
+</div>
+<p class="text-[12px] text-[#9FB0C8] leading-relaxed">
+            Stres altında testler atlandı, provizyon deserialization hatası yakalanamadı.
+          </p>
+</div>
+<span class="w-2 h-2 rounded-full bg-[#F28C28] shrink-0 mt-2"></span>
+</div>
+<!-- Row 3 -->
+<div class="bg-[#13294B] rounded-xl p-3.5 shadow-sm flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-[#0B1B33] flex items-center justify-center shrink-0 font-mono text-xs font-semibold text-[#9FB0C8] mt-0.5">
+          3
+        </div>
+<div class="flex-1 min-w-0 pr-2">
+<div class="font-medium text-[14px] text-[#F2F5FA] mb-1">
+            KVKK — Olduğu gibi gönderildi
+          </div>
+<p class="text-[12px] text-[#9FB0C8] leading-relaxed">
+            Hata ayıklamak için paylaşılan ham payload logunda hasta TC ve reçete detayları açıktaydı.
+          </p>
+</div>
+<span class="w-2 h-2 rounded-full bg-[#F28C28] shrink-0 mt-2"></span>
+</div>
+</div>
+</section>
+<!-- 5. ROLE LESSON CARD ("ROLÜN İÇİN DERS") -->
+<section class="bg-[#1C3A66] rounded-xl p-4 shadow-lg mb-4">
+<div class="flex items-center gap-2 text-[#F28C28] mb-2.5">
+<span class="material-symbols-outlined text-[17px]">terminal</span>
+<span class="font-mono text-[11px] font-semibold tracking-wider">ROLÜN İÇİN DERS · BACKEND GELİŞTİRİCİ</span>
+</div>
+<p class="text-[13px] text-[#F2F5FA] leading-relaxed font-normal">
+      Belirtiyi değil kökü düzelt: zaman aşımını kısaltıp güvenlik kontrolünü atlanabilir yapmak çöküşü yalnızca erteler, üstüne hasta güvenliğini riske atar.
+    </p>
+</section>
+<!-- 6. TUTOR LINK -->
+<div class="flex items-center justify-center mb-6">
+<button class="group flex items-center justify-center gap-2 py-2 text-[#F28C28] hover:text-[#f39c43] transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[17px]">help</span>
+<span class="text-[14px] font-medium group-hover:underline">Tutor ile bu sonucu konuş</span>
+</button>
+</div>
+<!-- 7. REPLAY INTERACTION SCRIPT & RECOVERY ACTION BLOCK -->
+<div class="flex flex-col items-center gap-2">
+<button class="w-full h-[52px] rounded-xl bg-[#F28C28] hover:bg-[#e07d19] active:scale-[0.99] text-[#0B1B33] font-semibold text-[15px] tracking-wide flex items-center justify-center transition-all shadow-md" id="replayBtn" type="button">
+      Yeniden oyna
+    </button>
+<p class="text-center font-mono text-[11px] text-[#9FB0C8] tracking-tight">
+      Farklı kararlar alarak sistemi stabil tutmayı dene.
+    </p>
+</div>
+<script>
+    document.getElementById('replayBtn')?.addEventListener('click', () => {
+      const btn = document.getElementById('replayBtn');
+      btn.innerText = 'Sistem Sıfırlanıyor...';
+      btn.classList.add('opacity-80');
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    });
+  </script>
+</div></main>
+<!-- 7. STICKY BOTTOM BUTTON & HELPER TEXT -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-[390px] bg-[#0B1B33]/95 backdrop-blur-md border-t border-[#2A4A7A] p-4 flex flex-col items-center gap-2 z-40">
+<!-- Disabled Primary Button: 52px, orange fill, 12px radius, 40% opacity -->
+<button class="w-full h-[52px] rounded-[12px] bg-[#F28C28] text-[#0B1B33] font-semibold text-[15px] tracking-wide flex items-center justify-center opacity-40 cursor-not-allowed select-none" disabled="">
+        Nöbeti devral
+      </button>
+<!-- Secondary Helper Text -->
+<div class="text-[13px] text-[#9FB0C8] font-normal">
+        3 sorunun hepsini cevapla
+      </div>
+</div>
+</div>
+</body></html>
